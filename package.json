@@ -1,0 +1,10 @@
+{
+  "name": "nevernote-slides",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "prismjs": "^1.14.0",
+    "reveal.js": "^3.6.0"
+  }
+}

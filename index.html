@@ -1,0 +1,541 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/css/theme/moon.css">
+    <link rel='stylesheet' href='node_modules/prismjs/themes/prism.css' />
+    <link rel='stylesheet' href='node_modules/prismjs/themes/prism-tomorrow.css' />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img class="flisol-logo" data-src="logo-flisol.png">
+          <h2>Tu Primera Aplicación Web con React</h1>
+          <p>
+            <small>Andrés Ávila</small>
+          </p>
+        </section>
+
+        <section>
+          <h2>React FAQ</h2>
+
+          <ol>
+            <li>¿Qué es?</li>
+            <li>¿Qué son los componentes?</li>
+            <li>Virtual DOM</li>
+            <li>React vs Otros</li>
+            <li>¿Por qué elegir React?</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Requerimientos</h2>
+          <p>NodeJS (Instalación con nvm: <a href="https://github.com/creationix/nvm">github.com/creationix/nvm</a>)</p>
+
+          <p>o</p>
+
+          <p>Usar un playground: <a href="https://codesandbox.io">codesandbox.io</a></p>
+        </section>
+
+        <section>
+          <h2>Instalación</h2>
+          <h3>create-react-app</h3>
+
+          <div class="columns">
+            <div class="col-6">
+              <strong>npm >= v5.1</strong>
+              <pre><code class="language-bash">npx --version</code></pre>
+              <small>Verificar que se tiene npx</small>
+            </div>
+
+            <div class="col-6">
+              <strong>npm < v5.1</strong>
+              <pre><code class="language-bash">npm install -g create-react-app</code></pre>
+              <small>-g = instalación global</small>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nevernote</h2>
+            <img src="simplinote-01.png" alt="">
+          </section>
+
+          <section>
+            <h2>Nevernote: componentes</h2>
+            <img src="simplinote-02.png" alt="">
+          </section>
+
+          <section>
+            <h2>Nevernote: Estructura de componentes</h2>
+            <img src="nevernote-components.png" alt="">
+          </section>
+
+          <section>
+            <h2>Nevernote: código fuente</h2>
+            <a href="https://github.com/andaviaco/nevernote">https://github.com/andaviaco/nevernote</a>
+          </section>
+        </section>
+
+        <section>
+          <h2>Inicialización</h2>
+
+          <p>Crear app</p>
+          <pre><code class="language-bash">$ [npx] create-react-app nevernote</code></pre>
+
+          <p>servidor de pruebas</p>
+          <pre><code class="language-bash">$ cd nevernote/</code></pre>
+          <pre><code class="language-bash">$ npm start</code></pre>
+        </section>
+
+        <section>
+          <h2>Estructura del Proyecto</h2>
+          <div class="columns">
+            <div class="col-6">
+              <img src="project-structure.png" alt="">
+            </div>
+            <div class="col-6">
+              <strong>src/</strong>
+              <p>Código fuente y assets.</p>
+              <hr/>
+              <strong>public/</strong>
+              <p>Archivos públicos y estáticos.</p>
+            </div>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nuestro primer Componente</h2>
+
+            <p>Crear carpeta de componentes</p>
+            <pre><code class="language-bash">$ mkdir src/components</code></pre>
+
+            <p>Crear archivo de componente de NoteList</p>
+            <pre><code class="language-bash">$ touch src/components/NoteList.js</code></pre>
+          </section>
+
+          <section>
+            <h3>src/compoents/NoteList.js</h3>
+            <pre><code class="language-jsx" data-trim contenteditable>import React, { Component } from 'react';
+class NoteList extends Component {
+  render() {
+    return (
+      &lt;section&gt;
+        &lt;h2&gt;Notas&lt;/h2&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Mi primera notita&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/section&gt;
+    );
+  }
+}
+export default NoteList;</code></pre>
+          </section>
+
+          <section>
+            <h2>Mostrar el Componente</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>import NoteList from './components/NoteList';
+
+class App extends Component {
+  render() {
+    return (
+      ...
+      &lt;NoteList /&gt;
+      ...
+    );
+  }</code></pre>
+              </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>JSX</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;</code></pre>
+            <ul>
+              <li>No es HTML</li>
+              <li>Extensión de sintaxis para JavaScript</li>
+              <li>Descripción de UI</li>
+              <li>No es obligatorio</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Expresiones en JSX</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>function formatName(user) {
+  return user.firstName + ' ' + user.lastName;
+}
+
+const user = {
+  firstName: 'Harper',
+  lastName: 'Perez'
+};
+
+const element = (
+  &lt;h1&gt;
+    Hello, {formatName(user)}!
+  &lt;/h1&gt;
+);</code></pre>
+          </section>
+
+          <section>
+            <h2>JSX también es una expresión</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>function getGreeting(user) {
+  if (user) {
+    return &lt;h1&gt;Hello, {formatName(user)}!&lt;/h&gt;;
+  }
+  return &lt;h1&gt;Hello, Stranger.&lt;/h1&gt;;
+}</code></pre>
+          </section>
+
+          <section>
+            <h2>Atributos</h2>
+            <p>Como string</p>
+            <pre><code class="language-jsx" data-trim contenteditable>const element = &lt;div tabIndex="0"&gt;&lt;/div&gt;;</code></pre>
+            <p>Como expresión</p>
+            <pre><code class="language-jsx" data-trim contenteditable>const element = &lt;img src={user.avatarUrl}&gt;&lt;/img&gt;;</code></pre>
+          </section>
+
+          <section>
+            <h2>Elementos Hijo</h2>
+            <p>Con hijos</p>
+            <pre><code class="language-jsx" data-trim contenteditable>const element = (
+  &lt;div&gt;
+    &lt;h1&gt;Hello!&lt;/h1&gt;
+    &lt;h2&gt;Good to see you here.&lt;/h2&gt;
+  &lt;/div&gt;
+);</code></pre>
+          <p>Sin hijos</p>
+          <pre><code class="language-jsx" data-trim contenteditable>const element = &lt;img src={user.avatarUrl} /&gt;;</code></pre>
+          </section>
+
+          <section>
+            <h2>JSX representan objetos</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// JSX
+const element = (
+  &lt;h1 className="greeting"&gt;
+  Hello, world!
+  &lt;/h1&gt;
+);</code></pre>
+
+            <pre><code class="language-js" data-trim contenteditable>// Javascript
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);</code></pre>
+          </section>
+
+          <section>
+            <h2>Objeto final</h2>
+            <pre><code class="language-js" data-trim contenteditable>// nota: representación simplificada
+const element = {
+  type: 'h1',
+  props: {
+    className: 'greeting',
+    children: 'Hello, world!'
+  }
+};</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Component State</h2>
+          <p>State = Estado del componente</p>
+
+          <pre><code class="language-js" data-trim contenteditable>// src/App.js
+
+constructor() {
+  super();
+  this.state = {
+    notes: [
+      { text: 'mi nota en el state' },
+    ],
+  };
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Props</h2>
+          <p>Props = Inputs del componente</p>
+          <pre><code class="language-jsx" data-trim contenteditable>&lt;NoteList notes={this.state.notes} /&gt;</code></pre>
+        </section>
+
+        <section>
+          <h2>Uso de Props</h2>
+          <p>Props = Inputs del componente</p>
+          <pre><code class="language-jsx" data-trim contenteditable> // src/NoteList.js
+&lt;ul&gt;
+  {this.props.notes.map(note => note.text)}
+&lt;/ul&gt;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Stateless components</h2>
+          <p>Componentes sin estado</p>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/components/Note.js
+const Note = ({ text }) => (
+  &lt;li&gt;{ text }&lt;/li&gt;
+);
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Subrenders</h2>
+          <p>Componentes sin estado</p>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteList.js
+renderNotes(notes) {
+  return this.props.notes.map((note, i) => (
+    &lt;Note key={i} text={note.text} /&gt;
+  ));
+}
+
+render() {
+  ...
+  {this.renderNotes(this.props.notes)}
+  ...
+}
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Componente NoteEditor</h2>
+          <pre><code class="language-bash">$ touch src/components/NoteEditor.js</code></pre>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteList.js
+import React, { Component } from 'react';
+class NoteEditor extends Component {
+  render() {
+    ...
+  }
+}
+export default NoteEditor;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>El “editor”</h2>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteEditor.js
+
+&lt;textarea placeholder="Nota...">&lt;/textarea&gt
+&lt;div&gt
+  &lt;button&gtLimpiar&lt;/button&gt
+  &lt;button&gtGuardar&lt;/button&gt
+&lt;/div&gt;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Más valores en el state</h2>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+this.state = {
+  editorContent: '',
+  notes: [...],
+}
+&lt;NoteEditor content={this.state.editorContent} />
+
+// src/components/NoteEditor.js
+&lt;textarea
+  placeholder="Nota..."
+  value={this.props.content}&gt;
+&lt;/textarea&gt;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Manejo de eventos y componentes controlados</h2>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteEditor.js
+handleChange = (e) => {
+  const { value } = e.target;
+  this.props.onContentChange(value);
+}
+
+&lt;textarea
+  placeholder="Nota..."
+  value={this.props.content}&gt;
+  onChange={this.handleChange}&gt;
+&lt;/textarea&gt;
+&lt;button onClick={this.props.onClearContent}&gt;Limpiar&lt;/button&gt;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Cambio de estado del componente</h2>
+          <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+updateContent = (content) => {
+  this.setState({ editorContent: content });
+}
+
+clearContent = () => {
+  this.setState({ editorContent: '' });
+}
+
+&lt;NoteEditor
+  onContentChange={this.updateContent}
+  onClearContent={this.clearContent}
+/&gt;
+</code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h2>Guardando una nota (1)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+  this.setState(state => {
+    return {
+      notes: [{text: state.editorContent}, ...state.notes],
+    };
+  }, this.clearContent());
+  &lt;NoteEditor onSaveNote={this.saveContent} /&gt;
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Guardando una nota (2)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteEditor.js
+
+&lt;button onClick={this.props.onClearContent}&gt;Limpiar&lt;/button&gt;
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Ver nota (1)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/components/NoteList.js
+
+const Note = ({ text, onSelect }) => (
+  &lt;li onClick={onSelect}>{ text }&lt;/li&gt;
+);
+
+&lt;Note
+  key={i}
+  text={note.text}
+  onSelect={() => this.props.onSelect(i)}
+/&gt;
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Ver nota (2)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+showNote = (index) => {
+  this.setState(({ notes }) => ({
+    editorContent: notes[index].text,
+  }));
+}
+
+&lt;NoteList notes={this.state.notes} onSelect={this.showNote} /&gt;
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Editar nota (1)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+editNote(selected, content) {
+  this.setState(state => {
+    const updatedNotes = [...this.state.notes];
+    updatedNotes[selected].text = content;
+    return { notes: updatedNotes };
+  }, this.clearContent());
+}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Editar nota (2)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+newNote(content) {
+  this.setState(state => ({
+    notes: [{text: content}, ...state.notes],
+  }), this.clearContent());
+}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Editar nota (3)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+saveContent = () => {
+  const { selected, editorContent } = this.state;
+
+  if (selected)  {
+    this.editNote(selected, editorContent);
+  } else {
+    this.newNote(editorContent);
+  }
+}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Editar nota (4)</h2>
+            <pre><code class="language-jsx" data-trim contenteditable>// src/App.js
+
+clearContent = () => {
+  this.setState({
+    editorContent: '',
+    selected: null,
+  });
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Review</h2>
+          <ul>
+            <li>Sobre React</li>
+            <li>Introducción a JSX</li>
+            <li>Renderizado de elementos</li>
+            <li>Creación de componentes</li>
+            <li>State y Props</li>
+            <li>Subrenders</li>
+            <li>Stateless Components</li>
+            <li>Listas de elementos</li>
+            <li>Manejo de eventos</li>
+            <li>Componentes controlados</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contacto</h2>
+          <p><a href="#">andaviaco@gmail.com</a></p>
+          <p><a href="http://github.com/andaviaco">@andaviaco</a></p>
+        </section>
+
+      </div>
+    </div>
+    <script src="node_modules/prismjs/prism.js"></script>
+    <script src="node_modules/prismjs/components/prism-jsx.min.js"></script>
+    <script src="node_modules/prismjs/components/prism-bash.min.js"></script>
+    <script src="node_modules/reveal.js/js/reveal.js"></script>
+    <style media="screen">
+      .flisol-logo {
+        width: 200px;
+      }
+
+      .columns {
+        display: flex;
+      }
+
+      .col-6 {
+        flex-basis: 50%;
+      }
+    </style>
+    <script>
+      Reveal.initialize({
+        history: true,
+      });
+    </script>
+  </body>
+</html>
